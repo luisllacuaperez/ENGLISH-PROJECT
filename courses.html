@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses - TechLearn Academy</title>
+  <meta name="description" content="Explore computer science courses carefully designed for beginners. From Basic Python programming and SQL databases to technical English and Mobile application developments.">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            pastel: {
+              blue: '#A5D8FF',
+              green: '#B2F2BB',
+              lavender: '#E5DBFF',
+              cyan: '#C5F6FA',
+              bg: '#F8FAFC',
+            },
+            brand: {
+              blue: '#339AF0',
+              green: '#37B24D',
+              lavender: '#7048E8',
+              dark: '#1E293B',
+              text: '#343A40',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- FontAwesome Icons & Core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-pastel-bg text-brand-dark min-h-screen relative flex flex-col justify-between">
+
+  <!-- Floating Organic Blobs -->
+  <div class="blob-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div>
+    <!-- Navigation bar -->
+    <nav class="glass-nav sticky top-0 z-40 w-full transition-smooth">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-lavender flex items-center justify-center text-white shadow-lg shadow-brand-blue/20 group-hover:rotate-6 transition-all duration-300">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </div>
+          <div>
+            <span class="font-extrabold text-lg tracking-tight font-heading block">TechLearn</span>
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest block -mt-1">Academy</span>
+          </div>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Home</a>
+          <a href="courses.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Courses</a>
+          <a href="about.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">About Us</a>
+          <a href="dashboard.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Dashboard</a>
+        </div>
+
+        <!-- Auth Action Container -->
+        <div id="navbar-user-container" class="flex items-center gap-4">
+          <!-- Renders Dynamically via app.js -->
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-3 shadow-inner">
+        <a href="index.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Home</a>
+        <a href="courses.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Courses</a>
+        <a href="about.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">About Us</a>
+        <a href="dashboard.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Dashboard</a>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="max-w-7xl mx-auto px-6 pt-12 pb-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-8">
+        <div>
+          <span class="text-xs font-bold text-blue-500 uppercase tracking-widest font-heading">Course Catalog</span>
+          <h1 class="text-3xl md:text-5xl font-extrabold font-heading text-slate-800 mt-2">Explore Our Classes</h1>
+          <p class="text-slate-500 text-sm mt-1">Unlock technical education through warm and guided modules designed for computer beginners.</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative max-w-sm w-full">
+          <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+          <input type="text" id="search-input" placeholder="Search python, SQL, English..." class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent shadow-sm text-sm font-medium transition-smooth">
+        </div>
+      </div>
+    </header>
+
+    <!-- Filter Buttons Bar -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <button onclick="filterCourses('all', this)" class="filter-tab px-6 py-2.5 rounded-full font-bold text-xs bg-blue-500 text-white shadow-md shadow-blue-500/10 hover-lift transition-smooth">
+          All Levels
+        </button>
+        <button onclick="filterCourses('Beginner', this)" class="filter-tab px-6 py-2.5 rounded-full font-bold text-xs bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 hover-lift transition-smooth">
+          Beginner
+        </button>
+        <button onclick="filterCourses('Intermediate', this)" class="filter-tab px-6 py-2.5 rounded-full font-bold text-xs bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 hover-lift transition-smooth">
+          Intermediate
+        </button>
+      </div>
+    </section>
+
+    <!-- Dynamic Courses Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+      <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered Dynamically by JS below -->
+      </div>
+      
+      <!-- Empty State -->
+      <div id="courses-empty" class="hidden text-center py-20 flex flex-col items-center gap-4">
+        <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-2xl">
+          <i class="fa-solid fa-box-open"></i>
+        </div>
+        <h3 class="font-bold text-slate-800 text-lg font-heading">No Courses Found</h3>
+        <p class="text-xs text-slate-500 max-w-xs">We couldn't find any courses matching your search. Try typing another keyword like 'Python' or 'SQL'.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800 mt-20 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-blue-500 flex items-center justify-center text-white">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span class="font-extrabold text-white text-lg font-heading tracking-tight">TechLearn Academy</span>
+        </div>
+        <p class="text-xs leading-relaxed text-slate-500">
+          A sleek, modern organic learning ecosystem designed to introduce coding, database design, and mobile tech systems comfortably to beginners.
+        </p>
+        <div class="flex gap-4 text-slate-400 mt-2">
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-twitter text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-facebook text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-instagram text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-linkedin text-lg"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Explore Pathways</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="course-detail.html?id=python-basics" class="hover:text-white transition-smooth">Basic Python Programming</a></li>
+          <li><a href="course-detail.html?id=sql-databases" class="hover:text-white transition-smooth">Database Design & SQL Server</a></li>
+          <li><a href="course-detail.html?id=english-computer-science" class="hover:text-white transition-smooth">English for Computer Science</a></li>
+          <li><a href="course-detail.html?id=mobile-development" class="hover:text-white transition-smooth">Mobile Android & iOS Apps</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Useful Links</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="index.html" class="hover:text-white transition-smooth">Home Overview</a></li>
+          <li><a href="courses.html" class="hover:text-white transition-smooth">Courses Catalog</a></li>
+          <li><a href="about.html" class="hover:text-white transition-smooth">About Platform</a></li>
+          <li><a href="dashboard.html" class="hover:text-white transition-smooth">Student Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Support Contact</h4>
+        <ul class="flex flex-col gap-3 text-xs text-slate-500">
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-envelope text-blue-400"></i>
+            <span>support@techlearn.edu</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-phone text-blue-400"></i>
+            <span>+1 (555) 234-5678</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-map-marker-alt text-blue-400"></i>
+            <span>Silicon Valley Campus, CA</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-slate-800 text-center text-xs text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>&copy; 2026 TechLearn Academy. All rights reserved. Made for educational growth.</span>
+      <div class="flex gap-4">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script>
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function renderCourses() {
+      const grid = document.getElementById('courses-grid');
+      const emptyState = document.getElementById('courses-empty');
+      grid.innerHTML = '';
+
+      const filtered = COURSES.filter(course => {
+        const matchesLevel = activeFilter === 'all' || course.level === activeFilter;
+        const matchesSearch = course.title.toLowerCase().includes(searchQuery) ||
+                              course.description.toLowerCase().includes(searchQuery) ||
+                              course.instructor.toLowerCase().includes(searchQuery);
+        return matchesLevel && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+        grid.classList.add('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        grid.classList.remove('hidden');
+        
+        filtered.forEach(course => {
+          const card = document.createElement('div');
+          card.className = 'glass-panel course-card hover-lift flex flex-col h-full border border-white/60';
+          card.innerHTML = `
+            <div class="relative h-56 overflow-hidden shrink-0">
+              <img src="${course.image}" alt="${course.title}" class="w-full h-full object-cover">
+              <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full ${course.levelClass}">${course.level}</span>
+            </div>
+            <div class="p-6 flex flex-col flex-grow gap-4">
+              <div class="flex items-center justify-between text-xs text-slate-400 font-semibold">
+                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock"></i> ${course.duration}</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> ${course.lessons} Lessons</span>
+              </div>
+              <h3 class="font-bold text-xl text-slate-800 leading-snug line-clamp-2">${course.title}</h3>
+              <p class="text-slate-500 text-sm leading-relaxed line-clamp-3">${course.description}</p>
+              
+              <div class="flex items-center gap-2 mt-2">
+                <div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-500">
+                  ${course.instructor.split(' ')[1].charAt(0)}
+                </div>
+                <span class="text-xs text-slate-400 font-medium">Instructor: <b>${course.instructor}</b></span>
+              </div>
+
+              <div class="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
+                <div class="flex items-center gap-1">
+                  <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                  <span class="text-sm font-bold text-slate-700">${course.rating}</span>
+                  <span class="text-xs text-slate-400 font-medium">(${course.reviews})</span>
+                </div>
+                <a href="course-detail.html?id=${course.id}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs px-5 py-2.5 rounded-full hover-lift transition-smooth shadow-md shadow-blue-500/10">View Course</a>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+    }
+
+    function filterCourses(level, button) {
+      activeFilter = level;
+      
+      // Update UI active tabs
+      const tabs = document.querySelectorAll('.filter-tab');
+      tabs.forEach(tab => {
+        tab.className = 'filter-tab px-6 py-2.5 rounded-full font-bold text-xs bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 hover-lift transition-smooth';
+      });
+      button.className = 'filter-tab px-6 py-2.5 rounded-full font-bold text-xs bg-blue-500 text-white shadow-md shadow-blue-500/10 hover-lift transition-smooth';
+      
+      renderCourses();
+    }
+
+    // Search bar event
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderCourses();
+    });
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCourses();
+    });
+  </script>
+</body>
+</html>

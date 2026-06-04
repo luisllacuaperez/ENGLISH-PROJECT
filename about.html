@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - TechLearn Academy</title>
+  <meta name="description" content="Discover TechLearn Academy's story, beginner-friendly learning methodology, active tech stack, and dedicated computer science teaching faculty.">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            pastel: {
+              blue: '#A5D8FF',
+              green: '#B2F2BB',
+              lavender: '#E5DBFF',
+              cyan: '#C5F6FA',
+              bg: '#F8FAFC',
+            },
+            brand: {
+              blue: '#339AF0',
+              green: '#37B24D',
+              lavender: '#7048E8',
+              dark: '#1E293B',
+              text: '#343A40',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- FontAwesome Icons & Core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-pastel-bg text-brand-dark min-h-screen relative flex flex-col justify-between">
+
+  <!-- Floating Organic Blobs -->
+  <div class="blob-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div>
+    <!-- Navigation bar -->
+    <nav class="glass-nav sticky top-0 z-40 w-full transition-smooth">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-lavender flex items-center justify-center text-white shadow-lg shadow-brand-blue/20 group-hover:rotate-6 transition-all duration-300">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </div>
+          <div>
+            <span class="font-extrabold text-lg tracking-tight font-heading block">TechLearn</span>
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest block -mt-1">Academy</span>
+          </div>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Home</a>
+          <a href="courses.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Courses</a>
+          <a href="about.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">About Us</a>
+          <a href="dashboard.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Dashboard</a>
+        </div>
+
+        <!-- Auth Action Container -->
+        <div id="navbar-user-container" class="flex items-center gap-4">
+          <!-- Renders Dynamically via app.js -->
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-3 shadow-inner">
+        <a href="index.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Home</a>
+        <a href="courses.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Courses</a>
+        <a href="about.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">About Us</a>
+        <a href="dashboard.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Dashboard</a>
+      </div>
+    </nav>
+
+    <!-- Header Intro -->
+    <header class="max-w-7xl mx-auto px-6 py-12 text-center max-w-3xl mx-auto flex flex-col gap-4">
+      <span class="text-xs font-bold text-blue-500 uppercase tracking-widest font-heading">Our Mission</span>
+      <h1 class="text-4xl md:text-6xl font-extrabold font-heading text-slate-800 leading-tight">Democratizing Tech Education For Everyone</h1>
+      <p class="text-slate-500 text-sm md:text-base leading-relaxed">
+        We believe that writing code and querying databases shouldn't feel like deciphering hieroglyphics. TechLearn was established to give beginners a comfortable, visual, and highly organic workspace to master tech frameworks.
+      </p>
+    </header>
+
+    <!-- History / Story with about-learning.jpg -->
+    <section class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 flex flex-col gap-6">
+        <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest font-heading">How It Started</span>
+        <h2 class="text-3xl font-extrabold font-heading text-slate-800">Our History & Growth</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Founded in 2024 by a passionate group of software architects and linguists, TechLearn Academy started from a simple observation: most technical courses are structured around advanced specifications, alienating students taking their first steps.
+        </p>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          We rebuilt tech education with a completely custom approach—merging smooth organic interfaces, curated colors, and detailed technical language translation. Our student success metrics validate this model every day.
+        </p>
+        
+        <!-- Stats Counter -->
+        <div class="grid grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+          <div>
+            <span class="block text-3xl font-extrabold text-blue-500 font-heading">15K+</span>
+            <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wide">Students</span>
+          </div>
+          <div>
+            <span class="block text-3xl font-extrabold text-purple-500 font-heading">4</span>
+            <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wide">Pathways</span>
+          </div>
+          <div>
+            <span class="block text-3xl font-extrabold text-emerald-500 font-heading">96%</span>
+            <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wide">Satisfied</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6 relative">
+        <div class="absolute inset-0 bg-gradient-to-tr from-pastel-blue to-pastel-green rounded-[40px] rotate-2 -z-10 scale-95 opacity-55"></div>
+        <img src="images/about-learning.jpg" alt="Active student learning layout" class="rounded-[36px] shadow-xl border-4 border-white object-cover w-full max-h-[380px]">
+      </div>
+    </section>
+
+    <!-- Methodology / Objectives Section -->
+    <section class="max-w-7xl mx-auto px-6 py-12">
+      <div class="text-center max-w-2xl mx-auto flex flex-col gap-3 mb-12">
+        <span class="text-xs font-bold text-purple-600 uppercase tracking-widest font-heading">Syllabus Philosophy</span>
+        <h2 class="text-3xl font-extrabold font-heading text-slate-800">Our Core Methodology</h2>
+        <p class="text-slate-500 text-xs">We base our courses on three solid pillars designed to remove tech anxiety:</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Pillar 1 -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/60 hover-lift text-center flex flex-col items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-lg shadow-sm">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-800 text-base font-heading">Simplified Terminology</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">We decompose dense topics like Python loops or SQL database indexes using familiar metaphors, ensuring conceptual understanding first.</p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/60 hover-lift text-center flex flex-col items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 text-lg shadow-sm">
+            <i class="fa-solid fa-laptop-code"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-800 text-base font-heading">Interactive Practice</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">No passive slide-watching. Students engage in practical milestone projects immediately, writing files and compiling apps.</p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/60 hover-lift text-center flex flex-col items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 text-lg shadow-sm">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-800 text-base font-heading">Language Integration</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">We merge software frameworks with Applied Computer Science English, unlocking documentation comprehension and PR logs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologies Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-12 bg-white rounded-[40px] shadow-sm border border-slate-100/50 my-12 relative overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <span class="text-xs font-bold text-teal-600 uppercase tracking-widest font-heading">System Stack</span>
+          <h2 class="text-3xl font-extrabold font-heading text-slate-800">Technologies We Master</h2>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            TechLearn Academy is built on clean, modern responsive frontend standards, preparing students visually for upcoming server architecture courses.
+          </p>
+          <div class="border-l-4 border-slate-200 pl-4 py-2">
+            <p class="text-xs text-slate-500 leading-relaxed italic">
+              "We maintain a clear visual-architectural separation, ensuring frontend screens are entirely ready for seamless database connection script integrations."
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <!-- Active Stack -->
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider mb-3">Active Frontend System</h4>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-orange-50 text-orange-700 border border-orange-100 flex items-center gap-1.5"><i class="fa-brands fa-html5 text-sm"></i> HTML5</span>
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-blue-50 text-blue-700 border border-blue-100 flex items-center gap-1.5"><i class="fa-brands fa-css3-alt text-sm"></i> CSS3</span>
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-yellow-50 text-yellow-800 border border-yellow-100 flex items-center gap-1.5"><i class="fa-brands fa-square-js text-sm"></i> JavaScript</span>
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-sky-50 text-sky-700 border border-sky-100 flex items-center gap-1.5"><i class="fa-brands fa-css3 text-sm"></i> Tailwind CSS</span>
+            </div>
+          </div>
+
+          <!-- Future Backend Roadmap -->
+          <div class="pt-6 border-t border-slate-100">
+            <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5 text-slate-400">
+              <i class="fa-solid fa-road text-[10px]"></i> Planned Backend Stack (Next Phase)
+            </h4>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-slate-100 text-slate-500 border border-slate-200/60 flex items-center gap-1.5"><i class="fa-brands fa-php text-sm"></i> PHP</span>
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-slate-100 text-slate-500 border border-slate-200/60 flex items-center gap-1.5"><i class="fa-solid fa-database text-xs"></i> MySQL Server</span>
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-slate-100 text-slate-500 border border-slate-200/60 flex items-center gap-1.5"><i class="fa-solid fa-server text-xs"></i> XAMPP Suite</span>
+              <span class="px-4 py-2 rounded-full font-bold text-xs bg-slate-100 text-slate-500 border border-slate-200/60 flex items-center gap-1.5"><i class="fa-brands fa-java text-sm"></i> Jakarta EE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Faculty / Team with about-team.jpg -->
+    <section class="max-w-7xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Team Image -->
+        <div class="lg:col-span-6 relative order-last lg:order-first">
+          <div class="absolute inset-0 bg-gradient-to-tr from-pastel-lavender to-pastel-blue rounded-[40px] -rotate-2 -z-10 scale-95 opacity-55"></div>
+          <img src="images/about-team.jpg" alt="TechLearn Academy developer team working" class="rounded-[36px] shadow-xl border-4 border-white object-cover w-full max-h-[380px]">
+        </div>
+
+        <div class="lg:col-span-6 flex flex-col gap-6">
+          <span class="text-xs font-bold text-purple-600 uppercase tracking-widest font-heading">Our Instructors</span>
+          <h2 class="text-3xl font-extrabold font-heading text-slate-800">Our Professional Faculty</h2>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Every pathway on TechLearn is curated by industry professionals and specialized researchers who hold years of software and linguistic expertise.
+          </p>
+
+          <div class="flex flex-col gap-4">
+            <!-- Faculty Member 1 -->
+            <div class="flex items-center gap-4 p-4 bg-white/50 border border-slate-100 rounded-2xl">
+              <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 font-bold text-sm shrink-0">
+                SJ
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">Dr. Sarah Jenkins</h4>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Lead Python & OOP Instructor</p>
+              </div>
+            </div>
+
+            <!-- Faculty Member 2 -->
+            <div class="flex items-center gap-4 p-4 bg-white/50 border border-slate-100 rounded-2xl">
+              <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 font-bold text-sm shrink-0">
+                DM
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">Prof. David Miller</h4>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Database & SQL Server Lead</p>
+              </div>
+            </div>
+
+            <!-- Faculty Member 3 -->
+            <div class="flex items-center gap-4 p-4 bg-white/50 border border-slate-100 rounded-2xl">
+              <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 font-bold text-sm shrink-0">
+                ET
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">Emma Thompson, MA</h4>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Applied Technical English Lead</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800 mt-20 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-blue-500 flex items-center justify-center text-white">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span class="font-extrabold text-white text-lg font-heading tracking-tight">TechLearn Academy</span>
+        </div>
+        <p class="text-xs leading-relaxed text-slate-500">
+          A sleek, modern organic learning ecosystem designed to introduce coding, database design, and mobile tech systems comfortably to beginners.
+        </p>
+        <div class="flex gap-4 text-slate-400 mt-2">
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-twitter text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-facebook text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-instagram text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-linkedin text-lg"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Explore Pathways</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="course-detail.html?id=python-basics" class="hover:text-white transition-smooth">Basic Python Programming</a></li>
+          <li><a href="course-detail.html?id=sql-databases" class="hover:text-white transition-smooth">Database Design & SQL Server</a></li>
+          <li><a href="course-detail.html?id=english-computer-science" class="hover:text-white transition-smooth">English for Computer Science</a></li>
+          <li><a href="course-detail.html?id=mobile-development" class="hover:text-white transition-smooth">Mobile Android & iOS Apps</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Useful Links</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="index.html" class="hover:text-white transition-smooth">Home Overview</a></li>
+          <li><a href="courses.html" class="hover:text-white transition-smooth">Courses Catalog</a></li>
+          <li><a href="about.html" class="hover:text-white transition-smooth">About Platform</a></li>
+          <li><a href="dashboard.html" class="hover:text-white transition-smooth">Student Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Support Contact</h4>
+        <ul class="flex flex-col gap-3 text-xs text-slate-500">
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-envelope text-blue-400"></i>
+            <span>support@techlearn.edu</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-phone text-blue-400"></i>
+            <span>+1 (555) 234-5678</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-map-marker-alt text-blue-400"></i>
+            <span>Silicon Valley Campus, CA</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-slate-800 text-center text-xs text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>&copy; 2026 TechLearn Academy. All rights reserved. Made for educational growth.</span>
+      <div class="flex gap-4">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>
