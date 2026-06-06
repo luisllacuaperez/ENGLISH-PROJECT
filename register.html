@@ -131,7 +131,7 @@
             <!-- Future Backend Comment Marker -->
             <!-- Future Jakarta EE / PHP Authentication System -->
 
-            <form id="register-form" class="flex flex-col gap-3.5">
+            <form id="registerForm" class="flex flex-col gap-3.5">
               <!-- Name -->
               <div class="flex flex-col gap-1.5">
                 <label for="name" class="text-xs font-bold text-slate-600 uppercase tracking-wider font-heading">Full Name</label>
@@ -274,7 +274,7 @@
   <!-- Scripts -->
   <script src="js/app.js"></script>
   <script>
-    document.getElementById('register-form').addEventListener('submit', (e) => {
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();

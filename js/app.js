@@ -122,21 +122,39 @@ function getLoggedUser() {
   return user ? JSON.parse(user) : null;
 }
 
-function loginUser(email, password) {
-  // Simple simulator
-  const name = email.split('@')[0];
-  const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
-  const user = {
-    name: formattedName,
-    email: email,
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150',
-    enrolledAt: new Date().toLocaleDateString()
-  };
-  localStorage.setItem('techlearn_user', JSON.stringify(user));
-  showToast('Welcome!', `Logged in successfully as ${formattedName}`, 'success');
-  setTimeout(() => {
-    window.location.href = 'dashboard.html';
-  }, 1200);
+// función loginUser:
+async function loginUser(email, password) {
+  try {
+    const response = await fetch('http://localhost/techlearnAcademy/api/auth/login.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.status === 'success') {
+      // Guardar el usuario real en localStorage para mantener la sesión
+      localStorage.setItem('techlearn_user', JSON.stringify(result.user));
+      
+      showToast('¡Bienvenido!', `Has iniciado sesión correctamente como ${result.user.name}`, 'success');
+      
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 1200);
+    } else {
+      showToast('Error', result.message, 'error');
+    }
+
+  } catch (error) {
+    console.error('Error en el login:', error);
+    showToast('Error de conexión', 'No se pudo conectar con el servidor', 'error');
+  }
 }
 
 function registerUser(name, email, password) {
@@ -213,50 +231,50 @@ function showToast(title, message, type = 'success') {
 }
 
 // 5. Global UI Init Helpers
-document.addEventListener('DOMContentLoaded', () => {
-  // Simple check to display active navigation correctly
-  const path = window.location.pathname;
-  const pageName = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
-  
-  // Setup user menu in navbar if elements exist
-  const navbarUserContainer = document.getElementById('navbar-user-container');
-  const loggedUser = getLoggedUser();
+document.addEventListener("DOMContentLoaded", () => {
+    // Seleccionar el formulario de registro
+    // Asegúrate de que la etiqueta <form> en register.html tenga id="registerForm"
+    const registerForm = document.getElementById('registerForm');
 
-  if (navbarUserContainer) {
-    if (loggedUser) {
-      navbarUserContainer.innerHTML = `
-        <div class="flex items-center gap-3">
-          <a href="dashboard.html" class="flex items-center gap-2 group">
-            <img src="${loggedUser.avatar}" alt="${loggedUser.name}" class="w-8 h-8 rounded-full border border-white/50 shadow-sm object-cover group-hover:scale-105 transition-all">
-            <span class="text-sm font-medium text-slate-700 hidden sm:inline-block hover:text-blue-500">${loggedUser.name}</span>
-          </a>
-          <button id="btn-nav-logout" class="text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 text-slate-500 hover:bg-slate-100 transition-smooth">Logout</button>
-        </div>
-      `;
-      const btnLogout = document.getElementById('btn-nav-logout');
-      if (btnLogout) {
-        btnLogout.addEventListener('click', (e) => {
-          e.preventDefault();
-          logoutUser();
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Evitar que la página se recargue
+
+            // Capturar los valores de los inputs (asegúrate de que tengan estos IDs en tu HTML)
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Hacer la petición asíncrona al backend
+                const response = await fetch('http://localhost/techlearnAcademy/api/auth/register.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        password: password
+                    })
+                });
+
+                // Convertir la respuesta de PHP a un objeto JavaScript
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    alert('¡Registro exitoso! Ya puedes iniciar sesión.');
+                    // Redirigir al usuario a la página de login
+                    window.location.href = 'login.html';
+                } else {
+                    // Mostrar error (ej. email duplicado)
+                    alert('Error: ' + result.message);
+                }
+
+            } catch (error) {
+                console.error('Error en la petición Fetch:', error);
+                alert('Hubo un problema de conexión con el servidor local.');
+            }
         });
-      }
-    } else {
-      navbarUserContainer.innerHTML = `
-        <div class="flex items-center gap-2">
-          <a href="login.html" class="text-sm font-semibold px-4 py-2 text-slate-600 hover:text-blue-500 transition-smooth">Login</a>
-          <a href="register.html" class="text-sm font-semibold bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-full hover-lift shadow-md shadow-blue-500/10 transition-smooth">Register</a>
-        </div>
-      `;
     }
-  }
-
-  // Active page selector highlighting
-  const navLinks = document.querySelectorAll('.nav-link');
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === pageName) {
-      link.classList.add('text-blue-500', 'font-semibold');
-      link.classList.remove('text-slate-600');
-    }
-  });
 });
