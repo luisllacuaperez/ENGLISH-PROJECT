@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - TechLearn Academy</title>
+  <meta name="description" content="Register an account at TechLearn Academy to track python programming progress, intermediate SQL queries, and technical Computer Science English.">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            pastel: {
+              blue: '#A5D8FF',
+              green: '#B2F2BB',
+              lavender: '#E5DBFF',
+              cyan: '#C5F6FA',
+              bg: '#F8FAFC',
+            },
+            brand: {
+              blue: '#339AF0',
+              green: '#37B24D',
+              lavender: '#7048E8',
+              dark: '#1E293B',
+              text: '#343A40',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- FontAwesome Icons & Core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-pastel-bg text-brand-dark min-h-screen relative flex flex-col justify-between">
+
+  <!-- Floating Organic Blobs -->
+  <div class="blob-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div>
+    <!-- Navigation bar -->
+    <nav class="glass-nav sticky top-0 z-40 w-full transition-smooth">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-lavender flex items-center justify-center text-white shadow-lg shadow-brand-blue/20 group-hover:rotate-6 transition-all duration-300">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </div>
+          <div>
+            <span class="font-extrabold text-lg tracking-tight font-heading block">TechLearn</span>
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest block -mt-1">Academy</span>
+          </div>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Home</a>
+          <a href="courses.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Courses</a>
+          <a href="about.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">About Us</a>
+          <a href="dashboard.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Dashboard</a>
+        </div>
+
+        <!-- Auth Action Container -->
+        <div id="navbar-user-container" class="flex items-center gap-4">
+          <!-- Renders Dynamically via app.js -->
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-3 shadow-inner">
+        <a href="index.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Home</a>
+        <a href="courses.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Courses</a>
+        <a href="about.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">About Us</a>
+        <a href="dashboard.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Dashboard</a>
+      </div>
+    </nav>
+
+    <!-- Main Auth Form Grid -->
+    <main class="max-w-5xl mx-auto px-6 py-12">
+      <div class="glass-panel rounded-[36px] overflow-hidden shadow-2xl border border-white/80 grid grid-cols-1 md:grid-cols-12 max-w-4xl mx-auto">
+        
+        <!-- Left Side: Brand Promo -->
+        <div class="md:col-span-5 bg-gradient-to-tr from-brand-blue via-brand-blue to-brand-lavender p-8 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
+          <!-- Background decoration shapes -->
+          <div class="absolute -top-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-md"></div>
+          <div class="absolute -bottom-16 -right-16 w-48 h-48 bg-white/10 rounded-full blur-lg"></div>
+          
+          <div class="relative z-10 flex flex-col gap-4">
+            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+              <i class="fa-solid fa-user-plus text-sm"></i>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-extrabold font-heading tracking-tight mt-4">Join TechLearn</h2>
+            <p class="text-xs leading-relaxed text-blue-100 mt-1">
+              Create a free student profile today and instantly start tracking your programming and database goals.
+            </p>
+          </div>
+
+          <div class="relative z-10 mt-12 md:mt-0 pt-8 border-t border-white/10 text-[10px] text-blue-100/70 flex flex-col gap-2">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-white"></i> Full syllabus enrollment</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-white"></i> 100% Free educational content</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-white"></i> Personal progress dashboard</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Registration Inputs -->
+        <div class="md:col-span-7 p-8 md:p-12 bg-white/40 flex flex-col justify-between">
+          <div class="flex flex-col gap-6">
+            <div>
+              <h3 class="text-xl font-extrabold font-heading text-slate-800">Create Account</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Please provide registration fields below:</p>
+            </div>
+
+            <!-- Future Backend Comment Marker -->
+            <!-- Future Jakarta EE / PHP Authentication System -->
+
+            <form id="register-form" class="flex flex-col gap-3.5">
+              <!-- Name -->
+              <div class="flex flex-col gap-1.5">
+                <label for="name" class="text-xs font-bold text-slate-600 uppercase tracking-wider font-heading">Full Name</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                    <i class="fa-regular fa-user"></i>
+                  </span>
+                  <input type="text" id="name" required placeholder="Alex Rivera" class="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm font-medium transition-smooth">
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="flex flex-col gap-1.5">
+                <label for="email" class="text-xs font-bold text-slate-600 uppercase tracking-wider font-heading">E-mail Address</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                    <i class="fa-regular fa-envelope"></i>
+                  </span>
+                  <input type="email" id="email" required placeholder="alex@example.com" class="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm font-medium transition-smooth">
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="flex flex-col gap-1.5">
+                <label for="password" class="text-xs font-bold text-slate-600 uppercase tracking-wider font-heading">Password</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                    <i class="fa-solid fa-key"></i>
+                  </span>
+                  <input type="password" id="password" required placeholder="••••••••" class="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm font-medium transition-smooth">
+                </div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="flex flex-col gap-1.5">
+                <label for="confirm-password" class="text-xs font-bold text-slate-600 uppercase tracking-wider font-heading">Confirm Password</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                    <i class="fa-solid fa-key text-slate-350"></i>
+                  </span>
+                  <input type="password" id="confirm-password" required placeholder="••••••••" class="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm font-medium transition-smooth">
+                </div>
+              </div>
+
+              <!-- Action button -->
+              <button type="submit" class="w-full font-bold bg-blue-500 hover:bg-blue-600 text-white py-3.5 rounded-full shadow-lg shadow-blue-500/10 hover-lift transition-smooth mt-2 flex items-center justify-center gap-2">
+                Register <i class="fa-solid fa-user-plus text-xs"></i>
+              </button>
+            </form>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col gap-4 text-center">
+            <span class="text-xs text-slate-500">Already have an account? <a href="login.html" class="font-bold text-blue-500 hover:underline">Sign In</a></span>
+            
+            <!-- Jakarta EE Backend Info Box -->
+            <div class="bg-slate-50 border border-slate-150 rounded-2xl p-4 text-[10px] text-slate-400 leading-relaxed text-left flex items-start gap-3">
+              <i class="fa-solid fa-server text-blue-400 mt-0.5 text-xs"></i>
+              <div>
+                <span class="font-bold text-slate-500 block">Jakarta EE Architecture Roadmap:</span>
+                Next phase will integrate standard enterprise controllers (e.g. `@WebServlet` or REST controllers) using Jakarta Persistence (JPA) `@Entity` beans to validate fields and write details into MySQL relational tables.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800 mt-20 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-blue-500 flex items-center justify-center text-white">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span class="font-extrabold text-white text-lg font-heading tracking-tight">TechLearn Academy</span>
+        </div>
+        <p class="text-xs leading-relaxed text-slate-500">
+          A sleek, modern organic learning ecosystem designed to introduce coding, database design, and mobile tech systems comfortably to beginners.
+        </p>
+        <div class="flex gap-4 text-slate-400 mt-2">
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-twitter text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-facebook text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-instagram text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-linkedin text-lg"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Explore Pathways</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="course-detail.html?id=python-basics" class="hover:text-white transition-smooth">Basic Python Programming</a></li>
+          <li><a href="course-detail.html?id=sql-databases" class="hover:text-white transition-smooth">Database Design & SQL Server</a></li>
+          <li><a href="course-detail.html?id=english-computer-science" class="hover:text-white transition-smooth">English for Computer Science</a></li>
+          <li><a href="course-detail.html?id=mobile-development" class="hover:text-white transition-smooth">Mobile Android & iOS Apps</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Useful Links</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="index.html" class="hover:text-white transition-smooth">Home Overview</a></li>
+          <li><a href="courses.html" class="hover:text-white transition-smooth">Courses Catalog</a></li>
+          <li><a href="about.html" class="hover:text-white transition-smooth">About Platform</a></li>
+          <li><a href="dashboard.html" class="hover:text-white transition-smooth">Student Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Support Contact</h4>
+        <ul class="flex flex-col gap-3 text-xs text-slate-500">
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-envelope text-blue-400"></i>
+            <span>support@techlearn.edu</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-phone text-blue-400"></i>
+            <span>+1 (555) 234-5678</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-map-marker-alt text-blue-400"></i>
+            <span>Silicon Valley Campus, CA</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-slate-800 text-center text-xs text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>&copy; 2026 TechLearn Academy. All rights reserved. Made for educational growth.</span>
+      <div class="flex gap-4">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById('register-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (password !== confirmPassword) {
+        showToast('Password Mismatch', 'Your passwords do not match. Please verify.', 'error');
+        return;
+      }
+
+      registerUser(name, email, password);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechLearn Academy - Learn Technology in a Simple and Friendly Way</title>
+  <meta name="description" content="TechLearn Academy is an organic educational platform designed for computer science beginners. Explore modern, responsive programming courses, SQL databases, technical English, and mobile applications in a friendly environment.">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            pastel: {
+              blue: '#A5D8FF',
+              green: '#B2F2BB',
+              lavender: '#E5DBFF',
+              cyan: '#C5F6FA',
+              bg: '#F8FAFC',
+            },
+            brand: {
+              blue: '#339AF0',
+              green: '#37B24D',
+              lavender: '#7048E8',
+              dark: '#1E293B',
+              text: '#343A40',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- FontAwesome Icons & Core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-pastel-bg text-brand-dark min-h-screen relative">
+
+  <!-- Floating Organic Blobs -->
+  <div class="blob-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Navigation bar -->
+  <nav class="glass-nav sticky top-0 z-40 w-full transition-smooth">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-lavender flex items-center justify-center text-white shadow-lg shadow-brand-blue/20 group-hover:rotate-6 transition-all duration-300">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-lg tracking-tight font-heading block">TechLearn</span>
+          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest block -mt-1">Academy</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Home</a>
+        <a href="courses.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Courses</a>
+        <a href="about.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">About Us</a>
+        <a href="dashboard.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-500 transition-smooth">Dashboard</a>
+      </div>
+
+      <!-- Auth Action Container -->
+      <div id="navbar-user-container" class="flex items-center gap-4">
+        <!-- Renders Dynamically via app.js -->
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-3 shadow-inner">
+      <a href="index.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Home</a>
+      <a href="courses.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Courses</a>
+      <a href="about.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">About Us</a>
+      <a href="dashboard.html" class="font-semibold text-slate-600 hover:text-blue-500 py-1">Dashboard</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-6 py-12 md:py-24 grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative">
+    <!-- Decorative shape 1 from Desktop -->
+    <div class="organic-bg-shape bg-no-repeat w-80 h-80 top-0 left-0" style="background-image: url('images/bg-shape-1.jpg'); filter: blur(5px);"></div>
+
+    <div class="md:col-span-6 flex flex-col gap-6">
+      <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 self-start">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
+        <span class="text-xs font-bold text-blue-700 tracking-wide font-heading">THE PERFECT START FOR BEGINNERS</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight font-heading">
+        Learn Technology in a <span class="text-gradient font-extrabold">Simple & Friendly</span> Way
+      </h1>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        TechLearn Academy is designed from the ground up for absolute beginners. Say goodbye to intimidating jargon and hello to interactive, comfortable learning pathways that help you build real-world software engineering foundations.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 mt-2">
+        <a href="courses.html" class="text-center font-bold bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full shadow-lg shadow-blue-500/20 hover-lift transition-smooth">
+          Explore Courses <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+        </a>
+        <a href="about.html" class="text-center font-bold bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-8 py-4 rounded-full shadow-sm hover-lift transition-smooth">
+          Learn More
+        </a>
+      </div>
+    </div>
+
+    <!-- Image wrapper -->
+    <div class="md:col-span-6 relative flex justify-center">
+      <!-- Decorative background border organic -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-pastel-blue to-pastel-lavender rounded-[40px] rotate-3 -z-10 scale-95 opacity-60 blur-xs"></div>
+      <div class="absolute -top-6 -right-6 w-20 h-20 bg-pastel-green rounded-full blur-md opacity-70 animate-pulse"></div>
+      <img src="images/hero-main.jpg" alt="Friendly student studying coding on desk" class="rounded-[36px] shadow-2xl border-4 border-white/80 object-cover w-full max-h-[480px] hover:rotate-1 transition-all duration-500">
+    </div>
+  </section>
+
+  <!-- Featured Courses -->
+  <section class="max-w-7xl mx-auto px-6 py-16 relative">
+    <div class="text-center max-w-2xl mx-auto flex flex-col gap-3 mb-12">
+      <span class="text-xs font-bold text-purple-600 uppercase tracking-widest font-heading">Our Best Courses</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-slate-800">Start Your Coding Journey Today</h2>
+      <p class="text-slate-500 text-sm">Explore our handpicked foundational courses carefully crafted for students with zero experience.</p>
+    </div>
+
+    <!-- Dynamic Cards Grid (uses template layout) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Course 1 -->
+      <div class="glass-panel course-card hover-lift flex flex-col h-full border border-white/60">
+        <div class="relative h-48 overflow-hidden shrink-0">
+          <img src="images/course-python.jpg" alt="Basic Programming with Python" class="w-full h-full object-cover">
+          <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">Beginner</span>
+        </div>
+        <div class="p-6 flex flex-col flex-grow gap-4">
+          <div class="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
+            <i class="fa-regular fa-clock"></i> <span>6 Weeks (24 hrs)</span>
+          </div>
+          <h3 class="font-bold text-lg text-slate-800 leading-snug line-clamp-1">Basic Programming with Python</h3>
+          <p class="text-slate-500 text-xs leading-relaxed line-clamp-3">Master the fundamentals of Python programming from scratch. Learn variables, control structures, and OOP.</p>
+          <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+              <span class="text-xs font-bold text-slate-700">4.8</span>
+              <span class="text-[10px] text-slate-400 font-semibold">(128)</span>
+            </div>
+            <a href="course-detail.html?id=python-basics" class="text-xs font-bold text-blue-500 hover:text-blue-600 hover:underline">View Course <i class="fa-solid fa-chevron-right ml-0.5"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 2 -->
+      <div class="glass-panel course-card hover-lift flex flex-col h-full border border-white/60">
+        <div class="relative h-48 overflow-hidden shrink-0">
+          <img src="images/course-sql.jpg" alt="Database Management with SQL Server" class="w-full h-full object-cover">
+          <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800">Intermediate</span>
+        </div>
+        <div class="p-6 flex flex-col flex-grow gap-4">
+          <div class="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
+            <i class="fa-regular fa-clock"></i> <span>8 Weeks (32 hrs)</span>
+          </div>
+          <h3 class="font-bold text-lg text-slate-800 leading-snug line-clamp-1">Database SQL Server</h3>
+          <p class="text-slate-500 text-xs leading-relaxed line-clamp-3">Learn to design, implement, and manage relational databases using Microsoft SQL Server and queries.</p>
+          <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+              <span class="text-xs font-bold text-slate-700">4.7</span>
+              <span class="text-[10px] text-slate-400 font-semibold">(94)</span>
+            </div>
+            <a href="course-detail.html?id=sql-databases" class="text-xs font-bold text-blue-500 hover:text-blue-600 hover:underline">View Course <i class="fa-solid fa-chevron-right ml-0.5"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 3 -->
+      <div class="glass-panel course-card hover-lift flex flex-col h-full border border-white/60">
+        <div class="relative h-48 overflow-hidden shrink-0">
+          <img src="images/course-english.jpg" alt="English Applied to Computer Science" class="w-full h-full object-cover">
+          <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">Beginner</span>
+        </div>
+        <div class="p-6 flex flex-col flex-grow gap-4">
+          <div class="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
+            <i class="fa-regular fa-clock"></i> <span>4 Weeks (16 hrs)</span>
+          </div>
+          <h3 class="font-bold text-lg text-slate-800 leading-snug line-clamp-1">English Applied to CS</h3>
+          <p class="text-slate-500 text-xs leading-relaxed line-clamp-3">Enhance your technical vocabulary and communication skills specifically for reading docs and writing code.</p>
+          <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+              <span class="text-xs font-bold text-slate-700">4.9</span>
+              <span class="text-[10px] text-slate-400 font-semibold">(215)</span>
+            </div>
+            <a href="course-detail.html?id=english-computer-science" class="text-xs font-bold text-blue-500 hover:text-blue-600 hover:underline">View Course <i class="fa-solid fa-chevron-right ml-0.5"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 4 -->
+      <div class="glass-panel course-card hover-lift flex flex-col h-full border border-white/60">
+        <div class="relative h-48 overflow-hidden shrink-0">
+          <img src="images/course-mobile.jpg" alt="Mobile App Development" class="w-full h-full object-cover">
+          <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800">Intermediate</span>
+        </div>
+        <div class="p-6 flex flex-col flex-grow gap-4">
+          <div class="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
+            <i class="fa-regular fa-clock"></i> <span>10 Weeks (40 hrs)</span>
+          </div>
+          <h3 class="font-bold text-lg text-slate-800 leading-snug line-clamp-1">Mobile App Development</h3>
+          <p class="text-slate-500 text-xs leading-relaxed line-clamp-3">Build native and cross-platform mobile apps for Android and iOS devices using modern responsive design.</p>
+          <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+              <span class="text-xs font-bold text-slate-700">4.6</span>
+              <span class="text-[10px] text-slate-400 font-semibold">(82)</span>
+            </div>
+            <a href="course-detail.html?id=mobile-development" class="text-xs font-bold text-blue-500 hover:text-blue-600 hover:underline">View Course <i class="fa-solid fa-chevron-right ml-0.5"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom link -->
+    <div class="text-center mt-12">
+      <a href="courses.html" class="inline-flex items-center gap-2 font-bold text-blue-500 hover:text-blue-600 transition-smooth group text-sm">
+        See all courses <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="max-w-7xl mx-auto px-6 py-16 bg-white rounded-[40px] shadow-sm border border-slate-100/50 my-12 relative overflow-hidden">
+    <!-- Decorative shape 2 from Desktop -->
+    <div class="organic-bg-shape bg-no-repeat w-72 h-72 bottom-0 right-0" style="background-image: url('images/bg-shape-2.jpg'); filter: blur(5px);"></div>
+    
+    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <span class="text-xs font-bold text-blue-500 uppercase tracking-widest font-heading">Why Choose TechLearn</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-slate-800 leading-tight">Learning Designed for the Beginner Mindset</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Traditional platforms start with intimidating walls of text. We present computer science in a warm, welcoming space, offering structured tracks with beautiful visualizations and simplified technical translations.
+        </p>
+        
+        <div class="flex items-center gap-4 mt-2">
+          <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 shrink-0">
+            <i class="fa-solid fa-users text-lg"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">15,000+ Enrolled Students</h4>
+            <p class="text-xs text-slate-500">Accelerating their software development careers comfortably.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Benefit 1 -->
+        <div class="glass-panel p-6 rounded-3xl border border-slate-100 hover-lift">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-500 mb-4 shadow-sm">
+            <i class="fa-solid fa-heart text-lg"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base mb-2">Beginner Friendly</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">No prior coding knowledge needed. Every programming term is explained in clear, simple everyday analogies.</p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="glass-panel p-6 rounded-3xl border border-slate-100 hover-lift">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 mb-4 shadow-sm">
+            <i class="fa-solid fa-code text-lg"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base mb-2">Practical Learning</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Learn by writing live programs, creating functional SQL databases, and coding Android/iOS mobile interfaces.</p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="glass-panel p-6 rounded-3xl border border-slate-100 hover-lift">
+          <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-500 mb-4 shadow-sm">
+            <i class="fa-solid fa-calendar-check text-lg"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base mb-2">Flexible Access</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Study entirely at your own pace from mobile phones, tablets, or computers. Fit learning smoothly around your daily life.</p>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="glass-panel p-6 rounded-3xl border border-slate-100 hover-lift">
+          <div class="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-500 mb-4 shadow-sm">
+            <i class="fa-solid fa-bolt text-lg"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base mb-2">Modern Content</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Regularly updated software materials aligning with modern web engineering, database architecture, and native standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="max-w-7xl mx-auto px-6 py-16 relative">
+    <div class="text-center max-w-2xl mx-auto flex flex-col gap-3 mb-16">
+      <span class="text-xs font-bold text-teal-600 uppercase tracking-widest font-heading">Student Success Stories</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-slate-800">What Our Graduates Say</h2>
+      <p class="text-slate-500 text-sm">Join thousands of students who unlocked the confidence to code and collaborate internationally.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Testimonial 1 -->
+      <div class="glass-panel p-8 rounded-3xl border border-white/60 relative flex flex-col justify-between shadow-sm hover-lift">
+        <i class="fa-solid fa-quote-left absolute top-6 right-8 text-4xl text-slate-100"></i>
+        <div class="flex-1 mb-6">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+          </div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">
+            "Before TechLearn, Python felt like an alien language. The soft explanations, lovely pastel layouts, and supportive vocabulary examples made it feel like reading an organic guide. Enrolling was the best choice of my career!"
+          </p>
+        </div>
+        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100" alt="Sophia Martinez" class="w-10 h-10 rounded-full object-cover">
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Sophia Martinez</h4>
+            <p class="text-[10px] text-slate-400 font-semibold">Self-taught Developer</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="glass-panel p-8 rounded-3xl border border-white/60 relative flex flex-col justify-between shadow-sm hover-lift">
+        <i class="fa-solid fa-quote-left absolute top-6 right-8 text-4xl text-slate-100"></i>
+        <div class="flex-1 mb-6">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+          </div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">
+            "Managing SQL databases sounded scary with all those select-join tables. TechLearn's structured diagrams and responsive lessons made SQL Server second-nature to me. Highly recommend for any IT beginner."
+          </p>
+        </div>
+        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="Lucas Chen" class="w-10 h-10 rounded-full object-cover">
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Lucas Chen</h4>
+            <p class="text-[10px] text-slate-400 font-semibold">Junior Systems Analyst</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="glass-panel p-8 rounded-3xl border border-white/60 relative flex flex-col justify-between shadow-sm hover-lift">
+        <i class="fa-solid fa-quote-left absolute top-6 right-8 text-4xl text-slate-100"></i>
+        <div class="flex-1 mb-6">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+          </div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">
+            "As an English beginner trying to read standard documentation, I was struggling. The Computer Science English course gave me exactly the terminology I needed to participate in meetings and write perfect Git commit logs."
+          </p>
+        </div>
+        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" alt="Elena Rodriguez" class="w-10 h-10 rounded-full object-cover">
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Elena Rodriguez</h4>
+            <p class="text-[10px] text-slate-400 font-semibold">Web Engineering Student</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  <section class="max-w-5xl mx-auto px-6 py-12 md:py-20 text-center relative">
+    <div class="glass-panel p-8 md:p-16 rounded-[40px] border border-white/80 shadow-2xl relative overflow-hidden flex flex-col items-center gap-6">
+      <div class="absolute inset-0 bg-gradient-to-br from-pastel-blue/40 via-pastel-lavender/30 to-pastel-green/20 -z-10"></div>
+      <h2 class="text-3xl md:text-5xl font-extrabold font-heading text-slate-800 leading-tight">Ready to Begin Your Technical Learning?</h2>
+      <p class="text-slate-600 max-w-xl text-sm md:text-base leading-relaxed">
+        Join TechLearn Academy today. Set up your learning profile, unlock free educational material, and check intermediate course milestones seamlessly.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4">
+        <a href="register.html" class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-blue-500/20 hover-lift transition-smooth text-center">
+          Create Free Account
+        </a>
+        <a href="courses.html" class="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold px-8 py-4 rounded-full shadow-sm hover-lift transition-smooth text-center">
+          Explore Courses
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800 mt-20 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-blue-500 flex items-center justify-center text-white">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span class="font-extrabold text-white text-lg font-heading tracking-tight">TechLearn Academy</span>
+        </div>
+        <p class="text-xs leading-relaxed text-slate-500">
+          A sleek, modern organic learning ecosystem designed to introduce coding, database design, and mobile tech systems comfortably to beginners.
+        </p>
+        <div class="flex gap-4 text-slate-400 mt-2">
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-twitter text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-facebook text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-instagram text-lg"></i></a>
+          <a href="#" class="hover:text-white transition-smooth"><i class="fa-brands fa-linkedin text-lg"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Explore Pathways</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="course-detail.html?id=python-basics" class="hover:text-white transition-smooth">Basic Python Programming</a></li>
+          <li><a href="course-detail.html?id=sql-databases" class="hover:text-white transition-smooth">Database Design & SQL Server</a></li>
+          <li><a href="course-detail.html?id=english-computer-science" class="hover:text-white transition-smooth">English for Computer Science</a></li>
+          <li><a href="course-detail.html?id=mobile-development" class="hover:text-white transition-smooth">Mobile Android & iOS Apps</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Useful Links</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-slate-500">
+          <li><a href="index.html" class="hover:text-white transition-smooth">Home Overview</a></li>
+          <li><a href="courses.html" class="hover:text-white transition-smooth">Courses Catalog</a></li>
+          <li><a href="about.html" class="hover:text-white transition-smooth">About Platform</a></li>
+          <li><a href="dashboard.html" class="hover:text-white transition-smooth">Student Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-sm font-heading mb-4 uppercase tracking-wider">Support Contact</h4>
+        <ul class="flex flex-col gap-3 text-xs text-slate-500">
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-envelope text-blue-400"></i>
+            <span>support@techlearn.edu</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-phone text-blue-400"></i>
+            <span>+1 (555) 234-5678</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-map-marker-alt text-blue-400"></i>
+            <span>Silicon Valley Campus, CA</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-slate-800 text-center text-xs text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>&copy; 2026 TechLearn Academy. All rights reserved. Made for educational growth.</span>
+      <div class="flex gap-4">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container inside app.js -->
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>
