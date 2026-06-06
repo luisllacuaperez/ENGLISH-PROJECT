@@ -298,7 +298,10 @@
     });
 
     // Initial render
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Llamamos a nuestra API de PHP
+      await loadCoursesFromDB(); 
+      // 2. Renderizamos los cursos en la página
       renderCourses();
     });
   </script>

@@ -1,95 +1,37 @@
 // TechLearn Academy - Dynamic Frontend Logic
 
 // 1. Mock Database of Courses
-const COURSES = [
-  {
-    id: 'python-basics',
-    title: 'Basic Programming with Python',
-    level: 'Beginner',
-    levelClass: 'bg-emerald-100 text-emerald-800',
-    duration: '6 Weeks (24 hours)',
-    lessons: 12,
-    instructor: 'Dr. Sarah Jenkins',
-    description: 'Master the fundamentals of Python programming from scratch. Learn variables, control structures, object-oriented concepts, and basic data analysis using hands-on exercises.',
-    rating: 4.8,
-    reviews: 128,
-    image: 'images/course-python.jpg',
-    topics: [
-      'Introduction to Programming & Python Setup',
-      'Variables, Data Types, and Operators',
-      'Control Flow: Conditionals and Loops',
-      'Functions and Modules',
-      'Working with Lists, Tuples, and Dictionaries',
-      'File Handling & Exception Management',
-      'Object-Oriented Programming (OOP) Basics'
-    ]
-  },
-  {
-    id: 'sql-databases',
-    title: 'Database Management with SQL Server',
-    level: 'Intermediate',
-    levelClass: 'bg-amber-100 text-amber-800',
-    duration: '8 Weeks (32 hours)',
-    lessons: 16,
-    instructor: 'Prof. David Miller',
-    description: 'Learn to design, implement, and manage relational databases using Microsoft SQL Server. Master complex queries, joins, indexing, and store procedures to become database proficient.',
-    rating: 4.7,
-    reviews: 94,
-    image: 'images/course-sql.jpg',
-    topics: [
-      'Relational Database Concepts',
-      'Installing SQL Server & SSMS',
-      'Data Definition Language (DDL): Tables & Relations',
-      'Data Manipulation Language (DML): Select, Insert, Update, Delete',
-      'Joins (Inner, Left, Right, Full) and Subqueries',
-      'Aggregations, Grouping, and Having clauses',
-      'Indexes, Views, and Performance Tuning'
-    ]
-  },
-  {
-    id: 'english-computer-science',
-    title: 'English Applied to Computer Science',
-    level: 'Beginner',
-    levelClass: 'bg-emerald-100 text-emerald-800',
-    duration: '4 Weeks (16 hours)',
-    lessons: 10,
-    instructor: 'Emma Thompson, MA',
-    description: 'Enhance your technical English vocabulary and communication skills specifically for software development, technical writing, documentation reading, and international collaboration.',
-    rating: 4.9,
-    reviews: 215,
-    image: 'images/course-english.jpg',
-    topics: [
-      'Technical Jargon & Developer Terminology',
-      'Reading and Understanding API Documentation',
-      'Writing Clear Git Commit Messages & PR Descriptions',
-      'Participating in Agile Meetings and Standups',
-      'Handling Technical Technical Interviews in English',
-      'Writing Technical Reports and E-mails'
-    ]
-  },
-  {
-    id: 'mobile-development',
-    title: 'Mobile App Development',
-    level: 'Intermediate',
-    levelClass: 'bg-amber-100 text-amber-800',
-    duration: '10 Weeks (40 hours)',
-    lessons: 20,
-    instructor: 'Alex Rivera, Senior Dev',
-    description: 'Build native and cross-platform mobile apps for Android and iOS. Learn UI layout design, state management, API integration, database storage, and app publishing workflows.',
-    rating: 4.6,
-    reviews: 82,
-    image: 'images/course-mobile.jpg',
-    topics: [
-      'Mobile Development Ecosystem (Android & iOS)',
-      'UI Layouts, Components, and Responsive Design',
-      'Managing State and User Navigation',
-      'Interacting with Web REST APIs',
-      'Local Storage and SQLite Databases',
-      'Debugging, Testing, and Optimization',
-      'App Store and Google Play Publishing Process'
-    ]
+// Variable global vacía. Ahora permitiremos que cambie (let en lugar de const)
+let COURSES = [];
+
+// Nueva función para cargar los cursos desde MySQL
+async function loadCoursesFromDB() {
+  try {
+    const response = await fetch('http://localhost/techlearnAcademy/api/courses/list.php');
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      // Formateamos los datos de la base de datos para que encajen exactamente 
+      // con lo que tu frontend actual (HTML) espera leer
+      COURSES = result.data.map(course => ({
+        id: course.id,
+        title: course.title,
+        level: course.level,
+        levelClass: course.level_class,
+        duration: course.duration,
+        lessons: course.lessons,
+        instructor: course.instructor,
+        description: course.description,
+        rating: course.rating,
+        reviews: course.reviews,
+        image: course.image,
+        topics: [] // Por ahora lo dejamos vacío, en el futuro se pueden traer de otra tabla
+      }));
+    }
+  } catch (error) {
+    console.error("Error cargando los cursos desde el backend:", error);
   }
-];
+}
 
 // 2. Initialize Local Storage Data
 function getEnrolledCourses() {
