@@ -188,7 +188,10 @@
   <!-- Scripts -->
   <script src="js/app.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 0. ¡NUEVO! Esperamos a que lleguen los cursos de MySQL primero
+      await loadCoursesFromDB();
+      
       // 1. Get Course ID from query parameters
       const params = new URLSearchParams(window.location.search);
       const courseId = params.get('id') || 'python-basics'; // fallback
@@ -218,7 +221,7 @@
         `;
       } else {
         enrollButtonHtml = `
-          <button onclick="handleEnrollClick('${course.id}')" class="w-full font-bold bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full shadow-lg shadow-blue-500/20 hover-lift transition-smooth flex items-center justify-center gap-2">
+          <button onclick="enrollCourseDB('${course.id}')" class="w-full font-bold bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full shadow-lg shadow-blue-500/20 hover-lift transition-smooth flex items-center justify-center gap-2">
             <i class="fa-solid fa-graduation-cap text-base"></i> Enroll in Course
           </button>
         `;
@@ -342,7 +345,7 @@
             <div class="border-2 border-dashed border-slate-200 p-6 rounded-3xl text-center text-xs text-slate-400">
               <i class="fa-solid fa-database text-lg mb-2 text-slate-300 block"></i>
               <span class="font-bold text-slate-500 block mb-1">PHP / MySQL Integration Point</span>
-              In a future backend stage, enrollment operations will invoke PHP scripts to store records in `techlearn_enrollments` database tables.
+              In a future backend stage, enrollment operations will invoke PHP scripts to store records in 'techlearn_enrollments' database tables.
               <!-- Future PHP MySQL database integration:
                    $sql = "INSERT INTO enrollments (user_id, course_id) VALUES (?, ?)";
                    $stmt = $conn->prepare($sql);
@@ -354,29 +357,6 @@
         </div>
       `;
     });
-
-    function handleEnrollClick(courseId) {
-      // Check if logged in first (simulation)
-      const user = getLoggedUser();
-      if (!user) {
-        showToast('Auth Required', 'Please create an account or login to enroll!', 'error');
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 1200);
-        return;
-      }
-      
-      const success = enrollInCourse(courseId);
-      if (success) {
-        // Redraw button to enrolled state
-        const btnContainer = document.getElementById('enroll-btn-container');
-        btnContainer.innerHTML = `
-          <button class="w-full font-bold bg-emerald-500 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-md shadow-emerald-500/10 cursor-default" disabled>
-            <i class="fa-solid fa-circle-check text-base"></i> You Are Enrolled
-          </button>
-        `;
-      }
-    }
   </script>
 </body>
 </html>

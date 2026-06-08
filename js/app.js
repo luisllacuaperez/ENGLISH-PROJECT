@@ -172,6 +172,49 @@ function showToast(title, message, type = 'success') {
   }, 4000);
 }
 
+// Función para matricularse en un curso interactuando con MySQL
+async function enrollCourseDB(courseId) {
+    const user = getLoggedUser();
+    
+    // Si no hay usuario logueado, lo mandamos al login
+    if (!user) {
+        showToast('Acceso denegado', 'Debes iniciar sesión para matricularte', 'error');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1500);
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost/techlearnAcademy/api/courses/enroll.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: user.id,
+                course_id: courseId
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            showToast('¡Éxito!', result.message, 'success');
+            // Opcional: Redirigir al dashboard para que vea su nuevo curso después de 1.5s
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        } else {
+            // Mostrará el error si ya está matriculado
+            showToast('Aviso', result.message, 'error');
+        }
+    } catch (error) {
+        console.error('Error en la matrícula:', error);
+        showToast('Error', 'No se pudo conectar con el servidor', 'error');
+    }
+}
+
 // 5. Global UI Init Helpers
 document.addEventListener("DOMContentLoaded", () => {
     // Seleccionar el formulario de registro
@@ -219,4 +262,57 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Aquí agrego la lógica para actualizar el perfil en el Dashboard
+    // Lógica para actualizar el perfil en el Dashboard
+  const settingsForm = document.getElementById('settings-form');
+  
+  if (settingsForm) {
+    // Rellenar el input con el nombre real guardado en localStorage al cargar la página
+    const currentUser = getLoggedUser();
+    if (currentUser) {
+      document.getElementById('settings-name').value = currentUser.name;
+    }
+
+    settingsForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const newName = document.getElementById('settings-name').value;
+      const user = getLoggedUser();
+
+      if (!user) return;
+
+      try {
+        const response = await fetch('http://localhost/techlearnAcademy/api/auth/update_profile.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id: user.id,
+            name: newName
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          // Actualizamos el nombre en el localStorage para que no se pierda al recargar
+          user.name = newName;
+          localStorage.setItem('techlearn_user', JSON.stringify(user));
+          
+          // Actualizamos los textos en la interfaz visual del dashboard instantáneamente
+          document.getElementById('db-user-name').innerText = newName;
+          document.getElementById('banner-user-name').innerText = newName.split(' ')[0];
+          
+          showToast('¡Actualizado!', result.message, 'success');
+        } else {
+          showToast('Error', result.message, 'error');
+        }
+      } catch (error) {
+        console.error('Error actualizando perfil:', error);
+        showToast('Error', 'No se pudo conectar con el servidor', 'error');
+      }
+    });
+  }
 });
