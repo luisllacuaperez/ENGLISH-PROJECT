@@ -476,13 +476,6 @@
       showToast('Opening Module', `Resuming workspace for ${title}...`, 'success');
     }
 
-    function handleLeaveCourse(courseId) {
-      if (confirm('Are you sure you want to drop this course? Your learning checkpoints will be cleared.')) {
-        leaveCourse(courseId);
-        renderEnrolledCourses();
-      }
-    }
-
     function switchTab(tabId, button) {
       // Hide all tabs
       const contents = document.querySelectorAll('.tab-content');

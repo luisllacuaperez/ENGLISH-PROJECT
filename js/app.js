@@ -51,13 +51,6 @@ function enrollInCourse(courseId) {
   return false;
 }
 
-function leaveCourse(courseId) {
-  let enrolled = getEnrolledCourses();
-  enrolled = enrolled.filter(id => id !== courseId);
-  localStorage.setItem('techlearn_enrolled', JSON.stringify(enrolled));
-  showToast('Removed', 'Successfully left the course', 'info');
-}
-
 // 3. User Mock Authentications
 function getLoggedUser() {
   const user = localStorage.getItem('techlearn_user');
@@ -212,6 +205,46 @@ async function enrollCourseDB(courseId) {
     } catch (error) {
         console.error('Error en la matrícula:', error);
         showToast('Error', 'No se pudo conectar con el servidor', 'error');
+    }
+}
+
+// Función para desmatricularse interactuando con MySQL
+async function handleLeaveCourse(courseId) {
+    const user = getLoggedUser();
+    if (!user) return;
+
+    // Pedimos confirmación al usuario antes de borrar
+    if (confirm('¿Estás seguro de que deseas abandonar este curso? Se perderá tu progreso.')) {
+        try {
+            const response = await fetch('http://localhost/techlearnAcademy/api/courses/leave.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: user.id,
+                    course_id: courseId
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                showToast('Curso eliminado', result.message, 'success');
+                
+                // Volvemos a renderizar la lista del dashboard para que el curso desaparezca de la pantalla
+                if (typeof renderEnrolledCourses === 'function') {
+                    renderEnrolledCourses();
+                } else {
+                    window.location.reload();
+                }
+            } else {
+                showToast('Error', result.message, 'error');
+            }
+        } catch (error) {
+            console.error('Error al desmatricularse:', error);
+            showToast('Error', 'No se pudo conectar con el servidor', 'error');
+        }
     }
 }
 
