@@ -18,11 +18,20 @@ if (!empty($data->email) && !empty($data->password)) {
 
         $user = $stmt->fetch();
 
-        // Verificar si el usuario existe y la contraseña coincide
         if ($user && password_verify($password, $user['password'])) {
-            http_response_code(200); // OK
+            // ¡NUEVO!: Bloquear acceso si el usuario fue "eliminado" (baneado)
+            if ($user['status'] === 'banned') {
+                http_response_code(403);
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Acceso denegado: Esta cuenta ha sido suspendida permanentemente."
+                ]);
+                exit; // Detenemos la ejecución aquí
+            }
+
+            http_response_code(200);
             
-            // Devolvemos los datos del usuario (¡Ojo! Nunca devuelvas la contraseña)
+            // ¡NUEVO!: Agregamos el rol a la respuesta JSON
             echo json_encode([
                 "status" => "success",
                 "message" => "Login exitoso",
@@ -31,6 +40,7 @@ if (!empty($data->email) && !empty($data->password)) {
                     "name" => $user['name'],
                     "email" => $user['email'],
                     "avatar" => $user['avatar'],
+                    "role" => $user['role'], // Enviamos el rol al frontend
                     "enrolledAt" => $user['created_at']
                 ]
             ]);

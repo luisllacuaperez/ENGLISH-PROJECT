@@ -79,8 +79,13 @@ async function loginUser(email, password) {
       
       showToast('¡Bienvenido!', `Has iniciado sesión correctamente como ${result.user.name}`, 'success');
       
+      // Reemplaza la redirección antigua (window.location.href = 'dashboard.html') por esto:
       setTimeout(() => {
-        window.location.href = 'dashboard.html';
+        if (result.user.role === 'admin') {
+            window.location.href = 'admin-dashboard.html';
+        } else {
+            window.location.href = 'dashboard.html';
+        }
       }, 1200);
     } else {
       showToast('Error', result.message, 'error');

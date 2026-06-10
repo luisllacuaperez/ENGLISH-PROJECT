@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - TechLearn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans">
+  
+  <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-40">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white"><i class="fa-solid fa-shield-halved"></i></div>
+      <span class="font-extrabold text-lg">Admin Center</span>
+    </div>
+    <button onclick="logoutUser()" class="text-xs font-bold text-rose-500 bg-rose-50 px-4 py-2 rounded-full hover:bg-rose-100 transition-all">Sign Out</button>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-6 py-12">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <h1 class="text-3xl font-extrabold text-slate-800">Student Management</h1>
+        <p class="text-sm text-slate-500 mt-1">Monitor accounts and suspend access for policy violations.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+            <th class="p-4 font-bold">Student Name</th>
+            <th class="p-4 font-bold">Email</th>
+            <th class="p-4 font-bold">Status</th>
+            <th class="p-4 font-bold text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-users-list" class="text-sm">
+          </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Protección de ruta: Asegurarse de que el usuario es admin
+      const user = getLoggedUser();
+      if (!user || user.role !== 'admin') {
+        window.location.href = 'login.html';
+        return;
+      }
+      loadUsers();
+    });
+
+    async function loadUsers() {
+      const tbody = document.getElementById('admin-users-list');
+      tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-400">Cargando usuarios...</td></tr>';
+      
+      try {
+        const response = await fetch('http://localhost/techlearnAcademy/api/admin/get_users.php');
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          tbody.innerHTML = '';
+          result.data.forEach(student => {
+            const isBanned = student.status === 'banned';
+            const statusBadge = isBanned 
+              ? '<span class="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-bold">Banned</span>'
+              : '<span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold">Active</span>';
+            
+            const actionButton = isBanned
+              ? `<span class="text-slate-300 text-xs font-bold"><i class="fa-solid fa-ban"></i> Access Revoked</span>`
+              : `<button onclick="banStudent(${student.id})" class="text-xs font-bold bg-rose-500 text-white px-4 py-2 rounded-full hover:bg-rose-600 transition-all shadow-md shadow-rose-500/20"><i class="fa-solid fa-trash-can mr-1"></i> Terminate Account</button>`;
+
+            tbody.innerHTML += `
+              <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-all">
+                <td class="p-4 font-bold text-slate-700">${student.name}</td>
+                <td class="p-4 text-slate-500">${student.email}</td>
+                <td class="p-4">${statusBadge}</td>
+                <td class="p-4 text-right">${actionButton}</td>
+              </tr>
+            `;
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function banStudent(id) {
+      if (confirm("¿Estás seguro de suspender a este estudiante? Ya no podrá iniciar sesión.")) {
+        try {
+          const response = await fetch('http://localhost/techlearnAcademy/api/admin/ban_user.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: id })
+          });
+          const result = await response.json();
+          if (result.status === 'success') {
+            showToast('Eliminado', result.message, 'success');
+            loadUsers(); // Recargar la tabla
+          }
+        } catch(e) {
+          console.error(e);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
