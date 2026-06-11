@@ -185,15 +185,7 @@
 
           <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col gap-4 text-center">
             <span class="text-xs text-slate-500">Already have an account? <a href="login.html" class="font-bold text-blue-500 hover:underline">Sign In</a></span>
-            
-            <!-- Jakarta EE Backend Info Box -->
-            <div class="bg-slate-50 border border-slate-150 rounded-2xl p-4 text-[10px] text-slate-400 leading-relaxed text-left flex items-start gap-3">
-              <i class="fa-solid fa-server text-blue-400 mt-0.5 text-xs"></i>
-              <div>
-                <span class="font-bold text-slate-500 block">Jakarta EE Architecture Roadmap:</span>
-                Next phase will integrate standard enterprise controllers (e.g. `@WebServlet` or REST controllers) using Jakarta Persistence (JPA) `@Entity` beans to validate fields and write details into MySQL relational tables.
-              </div>
-            </div>
+
           </div>
 
         </div>
@@ -273,21 +265,5 @@
 
   <!-- Scripts -->
   <script src="js/app.js"></script>
-  <script>
-    document.getElementById('registerForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-
-      if (password !== confirmPassword) {
-        showToast('Password Mismatch', 'Your passwords do not match. Please verify.', 'error');
-        return;
-      }
-
-      registerUser(name, email, password);
-    });
-  </script>
 </body>
 </html>

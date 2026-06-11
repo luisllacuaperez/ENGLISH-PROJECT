@@ -97,20 +97,6 @@ async function loginUser(email, password) {
   }
 }
 
-function registerUser(name, email, password) {
-  const user = {
-    name: name,
-    email: email,
-    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=150',
-    enrolledAt: new Date().toLocaleDateString()
-  };
-  localStorage.setItem('techlearn_user', JSON.stringify(user));
-  showToast('Registered!', 'Account created successfully!', 'success');
-  setTimeout(() => {
-    window.location.href = 'dashboard.html';
-  }, 1200);
-}
-
 function logoutUser() {
   localStorage.removeItem('techlearn_user');
   showToast('Logged Out', 'Successfully logged out', 'info');
@@ -255,6 +241,30 @@ async function handleLeaveCourse(courseId) {
 
 // 5. Global UI Init Helpers
 document.addEventListener("DOMContentLoaded", () => {
+  // ----------------------------------------------------
+    // LÓGICA DEL NAVBAR DINÁMICO
+    // ----------------------------------------------------
+    const navContainer = document.getElementById('navbar-user-container');
+    if (navContainer) {
+        const user = getLoggedUser();
+        
+        if (user) {
+            // Usuario LOGUEADO: Mostrar su foto, nombre y link al dashboard correcto
+            const dashboardLink = user.role === 'admin' ? 'admin-dashboard.html' : 'dashboard.html';
+            navContainer.innerHTML = `
+                <a href="${dashboardLink}" class="hidden sm:flex items-center gap-3 px-3 py-1.5 rounded-full hover:bg-slate-50 transition-smooth border border-transparent hover:border-slate-200">
+                    <img src="${user.avatar}" alt="Avatar" class="w-8 h-8 rounded-full object-cover">
+                    <span class="text-xs font-bold text-slate-700">${user.name.split(' ')[0]}</span>
+                </a>
+            `;
+        } else {
+            // Usuario NO LOGUEADO: Mostrar botones de Login y Register
+            navContainer.innerHTML = `
+                <a href="login.html" class="text-sm font-bold text-slate-600 hover:text-blue-500 transition-smooth">Sign In</a>
+                <a href="register.html" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-md shadow-blue-500/20 hover-lift transition-smooth">Register</a>
+            `;
+        }
+    }
     // Seleccionar el formulario de registro
     // Asegúrate de que la etiqueta <form> en register.html tenga id="registerForm"
     const registerForm = document.getElementById('registerForm');
@@ -286,17 +296,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 const result = await response.json();
 
                 if (result.status === 'success') {
-                    alert('¡Registro exitoso! Ya puedes iniciar sesión.');
-                    // Redirigir al usuario a la página de login
-                    window.location.href = 'login.html';
+                    showToast('¡Registro exitoso!','Ya puedes iniciar sesión.','success');
+                    setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+
                 } else {
                     // Mostrar error (ej. email duplicado)
-                    alert('Error: ' + result.message);
+                    showToast('Error: ' + result.message);
                 }
 
             } catch (error) {
                 console.error('Error en la petición Fetch:', error);
-                alert('Hubo un problema de conexión con el servidor local.');
+                showToast('Error','Hubo un problema de conexión con el servidor local.','error');
             }
         });
     }
