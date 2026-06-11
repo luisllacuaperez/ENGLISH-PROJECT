@@ -42,3 +42,24 @@ INSERT INTO courses (id, title, level, level_class, duration, lessons, instructo
 ('sql-databases', 'Database Management with SQL Server', 'Intermediate', 'bg-amber-100 text-amber-800', '8 Weeks (32 hours)', 16, 'Prof. David Miller', 'Learn to design, implement, and manage relational databases using Microsoft SQL Server. Master complex queries, joins, indexing, and store procedures to become database proficient.', 4.7, 94, 'images/course-sql.jpg'),
 ('english-computer-science', 'English Applied to Computer Science', 'Beginner', 'bg-emerald-100 text-emerald-800', '4 Weeks (16 hours)', 10, 'Emma Thompson, MA', 'Enhance your technical English vocabulary and communication skills specifically for software development, technical writing, documentation reading, and international collaboration.', 4.9, 215, 'images/course-english.jpg'),
 ('mobile-development', 'Mobile App Development', 'Intermediate', 'bg-amber-100 text-amber-800', '10 Weeks (40 hours)', 20, 'Alex Rivera, Senior Dev', 'Build native and cross-platform mobile apps for Android and iOS. Learn UI layout design, state management, API integration, database storage, and app publishing workflows.', 4.6, 82, 'images/course-mobile.jpg');
+
+-- Tabla para los temas/lecciones de cada curso
+CREATE TABLE lessons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    course_id VARCHAR(50) NOT NULL,
+    lesson_number INT NOT NULL,
+    title VARCHAR(150) NOT NULL,
+    content TEXT,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+);
+
+-- Tabla para rastrear qué lecciones ha completado cada usuario
+CREATE TABLE user_progress (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    lesson_id INT NOT NULL,
+    completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE,
+    UNIQUE(user_id, lesson_id)
+);
