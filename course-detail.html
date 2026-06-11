@@ -208,9 +208,31 @@
         return;
       }
 
-      // Check enrollment status
-      const enrolled = getEnrolledCourses();
-      const isEnrolled = enrolled.includes(courseId);
+      // -----------------------------------------------------
+      // NUEVA LÓGICA: Consultar a MySQL el estado de matrícula
+      // -----------------------------------------------------
+      let isEnrolled = false;
+      const user = getLoggedUser();
+
+      if (user) {
+        try {
+          // Usamos el endpoint que ya habíamos creado para el dashboard
+          const response = await fetch('api/courses/my_courses.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: user.id })
+          });
+          
+          const result = await response.json();
+          
+          if (result.status === 'success') {
+            // Verificamos si el ID de este curso está en la lista que nos devolvió PHP
+            isEnrolled = result.data.some(c => c.id === courseId);
+          }
+        } catch (error) {
+          console.error("Error verificando matrícula:", error);
+        }
+      }
       
       let enrollButtonHtml = '';
       if (isEnrolled) {

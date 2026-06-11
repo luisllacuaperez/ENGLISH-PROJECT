@@ -33,24 +33,6 @@ async function loadCoursesFromDB() {
   }
 }
 
-// 2. Initialize Local Storage Data
-function getEnrolledCourses() {
-  const enrolled = localStorage.getItem('techlearn_enrolled');
-  return enrolled ? JSON.parse(enrolled) : [];
-}
-
-function enrollInCourse(courseId) {
-  const enrolled = getEnrolledCourses();
-  if (!enrolled.includes(courseId)) {
-    enrolled.push(courseId);
-    localStorage.setItem('techlearn_enrolled', JSON.stringify(enrolled));
-    showToast('Success!', 'Successfully enrolled in course!', 'success');
-    return true;
-  }
-  showToast('Info', 'You are already enrolled in this course!', 'info');
-  return false;
-}
-
 // 3. User Mock Authentications
 function getLoggedUser() {
   const user = localStorage.getItem('techlearn_user');
