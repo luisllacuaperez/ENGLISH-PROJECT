@@ -1,5 +1,5 @@
 // TechLearn Academy - Dynamic Frontend Logic
-
+const pageName = window.location.pathname.split('/').pop() || 'index.html';
 // 1. Mock Database of Courses
 // Variable global vacía. Ahora permitiremos que cambie (let en lugar de const)
 let COURSES = [];
