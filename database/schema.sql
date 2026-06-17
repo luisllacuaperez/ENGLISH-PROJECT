@@ -63,3 +63,6 @@ CREATE TABLE user_progress (
     FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE,
     UNIQUE(user_id, lesson_id)
 );
+
+
+ALTER TABLE enrollments ADD COLUMN progress INT DEFAULT 0;
