@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom - TechLearn Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { brand: { blue: '#339AF0', dark: '#1E293B' } } } }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-brand-dark min-h-screen flex flex-col">
+
+  <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-40">
+    <a href="dashboard.html" class="flex items-center gap-3 group text-slate-600 hover:text-blue-500 transition-all">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span class="font-bold text-sm">Back to Dashboard</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-white"><i class="fa-solid fa-graduation-cap"></i></div>
+      <span class="font-extrabold text-slate-800">TechLearn Academy</span>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 flex-1 flex flex-col">
+    
+    <div class="mb-6">
+      <span id="lesson-course-name" class="text-xs font-bold text-blue-500 uppercase tracking-wider">Loading Course...</span>
+      <h1 id="lesson-title" class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1">Loading Module...</h1>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      
+      <div class="lg:col-span-2 flex flex-col gap-6">
+        
+        <div class="aspect-video bg-black rounded-3xl overflow-hidden shadow-xl border border-slate-200 relative">
+          <iframe id="lesson-video" class="absolute top-0 left-0 w-full h-full" src="" title="Course Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 class="font-bold text-slate-800 text-lg">Did you finish watching?</h3>
+            <p class="text-sm text-slate-500">Mark this module as completed to save your progress.</p>
+          </div>
+          <button id="complete-module-btn" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-full shadow-md shadow-emerald-500/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-check-circle text-lg"></i> Complete & Next (+10%)
+          </button>
+        </div>
+      </div>
+
+      <div class="lg:col-span-1 bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden flex flex-col h-[600px]">
+        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+          <h2 class="font-extrabold text-slate-800 text-lg"><i class="fa-solid fa-list-ul mr-2 text-blue-500"></i> Course Syllabus</h2>
+        </div>
+        
+        <div id="lesson-sidebar" class="flex-1 overflow-y-auto p-4 flex flex-col gap-2">
+          </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

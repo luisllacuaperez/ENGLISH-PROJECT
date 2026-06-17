@@ -4,6 +4,41 @@ const pageName = window.location.pathname.split('/').pop() || 'index.html';
 // Variable global vacía. Ahora permitiremos que cambie (let en lugar de const)
 let COURSES = [];
 
+// ========================================================
+// CONTENIDO ESTÁTICO DE LOS CURSOS (Módulos y Videos)
+// ========================================================
+// ========================================================
+// CONTENIDO ESTÁTICO DE LOS CURSOS (Módulos y Videos)
+// ========================================================
+const COURSE_CONTENT = {
+    "python-basics": [
+        // Usando el curso de FreeCodeCamp que permite inserción pública
+        { module: 1, title: "Introducción a Python y Entorno", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 2, title: "Variables y Tipos de Datos", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 3, title: "Operadores Matemáticos", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 4, title: "Condicionales (if/else)", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 5, title: "Bucles (for y while)", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 6, title: "Listas y Tuplas", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 7, title: "Diccionarios", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 8, title: "Creación de Funciones", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 9, title: "Manejo de Errores", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
+        { module: 10, title: "Proyecto Final: Calculadora", video: "https://www.youtube.com/embed/8DvywoWv6fI" }
+    ],
+    "sql-databases": [
+        // Usando el curso de SQL de FreeCodeCamp
+        { module: 1, title: "Introducción a Bases de Datos", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 2, title: "Modelo Entidad-Relación", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 3, title: "Crear Tablas (CREATE TABLE)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 4, title: "Insertar Datos (INSERT INTO)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 5, title: "Consultas Básicas (SELECT)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 6, title: "Filtrado Avanzado (WHERE)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 7, title: "Relaciones (INNER JOIN)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 8, title: "Funciones de Agrupación", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 9, title: "Subconsultas (Queries anidadas)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+        { module: 10, title: "Exportar Base de Datos", video: "https://www.youtube.com/embed/HXV3zeQKqGY" }
+    ]
+};
+
 // Nueva función para cargar los cursos desde MySQL
 async function loadCoursesFromDB() {
   try {
@@ -182,47 +217,55 @@ async function enrollCourseDB(courseId) {
 }
 
 // Función para desmatricularse interactuando con MySQL
+// Función para desmatricularse interactuando con MySQL
 async function handleLeaveCourse(courseId) {
     const user = getLoggedUser();
     if (!user) return;
 
-    // Pedimos confirmación al usuario antes de borrar
-    if (confirm('¿Estás seguro de que deseas abandonar este curso? Se perderá tu progreso.')) {
-        try {
-            const response = await fetch('http://localhost/techlearnAcademy/api/courses/leave.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    user_id: user.id,
-                    course_id: courseId
-                })
-            });
+    // AHORA USAMOS NUESTRO NUEVO MODAL DE TAILWIND ESPERANDO LA RESPUESTA
+    const isConfirmed = await showConfirmModal(
+        'Drop Course', 
+        'Are you sure you want to drop this course? All your learning checkpoints will be permanently cleared.'
+    );
 
-            const result = await response.json();
+    // Si el usuario hizo clic en "Cancel", isConfirmed es false y la función se detiene aquí.
+    if (!isConfirmed) return;
 
-            if (result.status === 'success') {
-                showToast('Curso eliminado', result.message, 'success');
-                
-                // Volvemos a renderizar la lista del dashboard para que el curso desaparezca de la pantalla
-                if (typeof renderEnrolledCourses === 'function') {
-                    renderEnrolledCourses();
-                } else {
-                    window.location.reload();
-                }
+    // Si hizo clic en "Drop Course", ejecutamos el borrado en la base de datos
+    try {
+        const response = await fetch('http://localhost/techlearnAcademy/api/courses/leave.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: user.id,
+                course_id: courseId
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            showToast('Course Dropped', result.message, 'success');
+            
+            if (typeof renderEnrolledCourses === 'function') {
+                renderEnrolledCourses();
             } else {
-                showToast('Error', result.message, 'error');
+                window.location.reload();
             }
-        } catch (error) {
-            console.error('Error al desmatricularse:', error);
-            showToast('Error', 'No se pudo conectar con el servidor', 'error');
+        } else {
+            showToast('Error', result.message, 'error');
         }
+    } catch (error) {
+        console.error('Error al desmatricularse:', error);
+        showToast('Error', 'No se pudo conectar con el servidor', 'error');
     }
 }
 
 // 5. Global UI Init Helpers
 document.addEventListener("DOMContentLoaded", () => {
+  initLessonPage();
   // ----------------------------------------------------
     // LÓGICA DEL NAVBAR DINÁMICO
     // ----------------------------------------------------
@@ -346,3 +389,143 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// ========================================================
+// MODAL DE CONFIRMACIÓN CON TAILWIND CSS
+// ========================================================
+function showConfirmModal(title, message) {
+    return new Promise((resolve) => {
+        // 1. Crear el fondo oscuro difuminado (Overlay)
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 transition-opacity duration-300';
+        
+        // 2. Crear la caja del modal
+        const modal = document.createElement('div');
+        modal.className = 'bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 transform scale-95 transition-transform duration-300';
+        
+        modal.innerHTML = `
+            <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-800 mb-2">${title}</h3>
+            <p class="text-sm text-slate-500 mb-6 leading-relaxed">${message}</p>
+            <div class="flex gap-3 justify-end w-full">
+                <button id="cancel-btn" class="flex-1 px-5 py-3 rounded-full text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all">Cancel</button>
+                <button id="confirm-btn" class="flex-1 px-5 py-3 rounded-full text-sm font-bold text-white bg-rose-500 hover:bg-rose-600 transition-all shadow-md shadow-rose-500/20">Drop Course</button>
+            </div>
+        `;
+        
+        // 3. Inyectarlos en la página
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+        
+        // 4. Activar la animación de entrada
+        requestAnimationFrame(() => {
+            overlay.classList.remove('opacity-0');
+            modal.classList.remove('scale-95');
+        });
+        
+        // 5. Función para cerrar el modal con animación
+        const closeModal = (result) => {
+            overlay.classList.add('opacity-0');
+            modal.classList.add('scale-95');
+            setTimeout(() => {
+                overlay.remove();
+                resolve(result); // Devuelve true (Sí) o false (Cancelar)
+            }, 300); // Espera a que termine la animación para borrarlo del HTML
+        };
+        
+        // 6. Escuchar los clics de los botones
+        modal.querySelector('#cancel-btn').addEventListener('click', () => closeModal(false));
+        modal.querySelector('#confirm-btn').addEventListener('click', () => closeModal(true));
+    });
+}
+
+// ========================================================
+// LÓGICA DE LA PÁGINA DE LECCIONES (lesson.html)
+// ========================================================
+function initLessonPage() {
+    // 1. Verificamos si estamos en la página de lecciones
+    const videoIframe = document.getElementById('lesson-video');
+    if (!videoIframe) return;
+
+    // 2. Leemos la URL (ej. ?course=python-basics&module=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('course');
+    const currentModule = parseInt(urlParams.get('module')) || 1;
+
+    // 3. Buscamos el curso en nuestro diccionario estático
+    const courseData = COURSE_CONTENT[courseId];
+    if (!courseData) {
+        document.getElementById('lesson-title').textContent = "Curso no encontrado o en mantenimiento.";
+        return;
+    }
+
+    const moduleData = courseData.find(m => m.module === currentModule);
+    
+    // 4. Inyectamos los datos en la pantalla
+    document.getElementById('lesson-course-name').textContent = courseId.replace('-', ' ');
+    document.getElementById('lesson-title').textContent = `Módulo ${moduleData.module}: ${moduleData.title}`;
+    videoIframe.src = moduleData.video;
+
+    // 5. Dibujamos el temario lateral dinámicamente
+    const sidebar = document.getElementById('lesson-sidebar');
+    sidebar.innerHTML = '';
+    courseData.forEach(m => {
+        const isCurrent = m.module === currentModule;
+        const btnClass = isCurrent 
+            ? 'bg-blue-50 border-blue-200 text-blue-700' 
+            : 'bg-white border-slate-100 text-slate-600 hover:bg-slate-50';
+
+        sidebar.innerHTML += `
+            <a href="lesson.html?course=${courseId}&module=${m.module}" 
+               class="flex items-center gap-3 p-4 rounded-xl border ${btnClass} transition-all">
+                <div class="w-8 h-8 rounded-full ${isCurrent ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-400'} flex items-center justify-center font-bold text-sm shrink-0">
+                    ${m.module}
+                </div>
+                <span class="text-sm font-bold leading-tight">${m.title}</span>
+            </a>
+        `;
+    });
+
+    // 6. Lógica del botón "Marcar como completado"
+    const completeBtn = document.getElementById('complete-module-btn');
+    completeBtn.addEventListener('click', async () => {
+        const user = getLoggedUser();
+        if (!user) return;
+
+        // Efecto visual de carga
+        completeBtn.disabled = true;
+        completeBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-lg"></i> Guardando...';
+
+        try {
+            // Mandamos la petición al PHP de Luis
+            const response = await fetch('http://localhost/techlearnAcademy/api/courses/update_progress.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: user.id, course_id: courseId })
+            });
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                showToast('¡Excelente!', '+10% de progreso guardado.', 'success');
+                
+                // Redirigir al siguiente módulo si existe
+                setTimeout(() => {
+                    const nextModule = currentModule + 1;
+                    if (courseData.find(m => m.module === nextModule)) {
+                        window.location.href = `lesson.html?course=${courseId}&module=${nextModule}`;
+                    } else {
+                        showToast('¡Curso Terminado!', 'Has completado todos los módulos.', 'success');
+                        setTimeout(() => window.location.href = 'dashboard.html', 1500);
+                    }
+                }, 1000);
+            }
+        } catch (error) {
+            console.error(error);
+            showToast('Error', 'Problema de conexión.', 'error');
+            completeBtn.disabled = false;
+        }
+    });
+}
