@@ -12,30 +12,52 @@ let COURSES = [];
 // ========================================================
 const COURSE_CONTENT = {
     "python-basics": [
-        // Usando el curso de FreeCodeCamp que permite inserción pública
-        { module: 1, title: "Introducción a Python y Entorno", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 2, title: "Variables y Tipos de Datos", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 3, title: "Operadores Matemáticos", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 4, title: "Condicionales (if/else)", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 5, title: "Bucles (for y while)", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 6, title: "Listas y Tuplas", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 7, title: "Diccionarios", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 8, title: "Creación de Funciones", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 9, title: "Manejo de Errores", video: "https://www.youtube.com/embed/8DvywoWv6fI" },
-        { module: 10, title: "Proyecto Final: Calculadora", video: "https://www.youtube.com/embed/8DvywoWv6fI" }
+        { module: 1, title: "1. Introducción a Python y Entorno", video: "https://www.youtube.com/embed/DAdRO6ByBoU?si=wMTrYY_WCTXgaRJP" },
+        { module: 2, title: "2. Variables y Tipos de Datos", video: "https://www.youtube.com/embed/EaWsOcc7R2M?si=M0m2_cfOOpE46O4C" },
+        { module: 3, title: "3. Operadores Matemáticos", video: "https://www.youtube.com/embed/6sOEpHItJHs?si=8DCroNUlaFQN54sl" },
+        { module: 4, title: "4. Condicionales (if/else)", video: "https://www.youtube.com/embed/43NYFfUM5uU?si=Ar7XJ0bxJ7Jngn_n" },
+        { module: 5, title: "5. Bucles (for y while)", video: "https://www.youtube.com/embed/aeXYFaIEELA?si=B-zcLz0b30hK74tQ" },
+        { module: 6, title: "6. Funciones en Python", video: "https://www.youtube.com/embed/_2bRQFzPiVA?si=t4ZXWxAdBlfoUrj8" },
+        { module: 7, title: "7. Listas y Tuplas", video: "https://www.youtube.com/embed/62UvizLLcNU?si=t1HTEJRyik1Ge9Mw" },
+        { module: 8, title: "8. Diccionarios y Sets", video: "https://www.youtube.com/embed/B10alyprBOc?si=XUmo7aQ67dmg6YnE" },
+        { module: 9, title: "9. Manejo de Errores (try/except)", video: "https://www.youtube.com/embed/dPkoI6BQc0E?si=t-kflxgnbtKWviFv" },
+        { module: 10, title: "10. Proyecto Final: Primer Script", video: "https://www.youtube.com/embed/GH6TOuYBVk0?si=RKevmidQQB1KYTD_" }
     ],
     "sql-databases": [
-        // Usando el curso de SQL de FreeCodeCamp
-        { module: 1, title: "Introducción a Bases de Datos", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 2, title: "Modelo Entidad-Relación", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 3, title: "Crear Tablas (CREATE TABLE)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 4, title: "Insertar Datos (INSERT INTO)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 5, title: "Consultas Básicas (SELECT)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 6, title: "Filtrado Avanzado (WHERE)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 7, title: "Relaciones (INNER JOIN)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 8, title: "Funciones de Agrupación", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 9, title: "Subconsultas (Queries anidadas)", video: "https://www.youtube.com/embed/HXV3zeQKqGY" },
-        { module: 10, title: "Exportar Base de Datos", video: "https://www.youtube.com/embed/HXV3zeQKqGY" }
+        { module: 1, title: "1. ¿Qué es una Base de Datos y SQL?", video: "https://www.youtube.com/embed/knVwokXITGI?si=hL3QDCw6cNERC6EV" },
+        { module: 2, title: "2. Instalación de MySQL y Herramientas", video: "https://www.youtube.com/embed/zDEUHPUl4iY?si=Eul3GdFIT0D6p3zF" },
+        { module: 3, title: "3. Creación de Tablas y Tipos de Datos", video: "https://www.youtube.com/embed/AstzeuTJ9UA?si=OW44nquQpVZSpIC3" },
+        { module: 4, title: "4. Clausula SELECT y Filtros Esenciales", video: "https://www.youtube.com/embed/tex3fKmIjK4?si=kQD_ddxNX3TJC7W4" },
+        { module: 5, title: "5. Operadores Lógicos (AND, OR, NOT)", video: "https://www.youtube.com/embed/UU_825pJu8g?si=6ixPmpY-J7Kti3-7" },
+        { module: 6, title: "6. Ordenamiento y Limitación de Datos", video: "https://www.youtube.com/embed/TkBrpPiQ8OQ?si=Wax4e5MRcv8q7-lL" },
+        { module: 7, title: "7. Funciones de Agregación (SUM, AVG, COUNT)", video: "https://www.youtube.com/embed/kQwDyx1wiXM?si=bodFNv_Z3IoldX5-" },
+        { module: 8, title: "8. Relaciones y Llaves Foráneas", video: "https://www.youtube.com/embed/tyyhIsDmVM0?si=Umc44cPYx3i6pkAr" },
+        { module: 9, title: "9. Consultas Multitabla (INNER JOIN)", video: "https://www.youtube.com/embed/0BstRqp6Svg?si=xr_-zcxalu3qQG2i" },
+        { module: 10, title: "10. Prácticas y Consultas Avanzadas", video: "https://www.youtube.com/embed/X4ffVGDI2Fo?si=96w_n-_civfoWhmm" }
+    ],
+    "mobile-development": [
+        { module: 1, title: "1. Introducción al Desarrollo Móvil", video: "https://www.youtube.com/embed/H8tykt3pKTU?si=tex-CWux5F7eTf3a" },
+        { module: 2, title: "2. Configuración del Entorno de Trabajo", video: "https://www.youtube.com/embed/-2wcHqLAbsY?si=9eD0Dq89HXBbA2V1" },
+        { module: 3, title: "3. Fundamentos del Lenguaje de Programación", video: "https://www.youtube.com/embed/W-AwQpWM4f0?si=D4u3xGQ_Pn87mII_" },
+        { module: 4, title: "4. Diseño de Interfaces de Usuario (UI)", video: "https://www.youtube.com/embed/uCGkaYYhE9k?si=hA1HU4t9vPxgtIvU" },
+        { module: 5, title: "5. Contenedores y Layouts Comunes", video: "https://www.youtube.com/embed/x2k1kg86w3A?si=KidFIBLnYT2bSC3r" },
+        { module: 6, title: "6. Gestión de Estados y Eventos (Clicks)", video: "https://www.youtube.com/embed/-nOxpsaNB0s?si=CvK85Aa1JXrc4hyP" },
+        { module: 7, title: "7. Navegación entre Múltiples Pantallas", video: "https://www.youtube.com/embed/JFLcfW676VA?si=G8QuQVaGsqDUkG1M" },
+        { module: 8, title: "8. Consumo de APIs y Datos Externos", video: "https://www.youtube.com/embed/f9BCfJwENJM?si=k0-dfNSAJHYN4IjK" },
+        { module: 9, title: "9. Almacenamiento Local de Datos", video: "https://www.youtube.com/embed/TtnNohvz_8g?si=wvU-PaDvnNAqV-ED" },
+        { module: 10, title: "10. Compilación y Despliegue en Dispositivos", video: "https://www.youtube.com/embed/UFbdO-RmxUk?si=Q0UzzICPEI6pNeiF" }
+    ],
+    "english-computer-science": [
+        { module: 1, title: "1. Tech Vocabulary for Software Engineering", video: "https://www.youtube.com/embed/FhqjtB3qcrs?si=5vm5mC_3HSK4DpkU" },
+        { module: 2, title: "2. Reading Technical Documentation Efficiently", video: "https://www.youtube.com/embed/SWr6NW2osqc?si=5xjSSFhk9ZquG9Vt" },
+        { module: 3, title: "3. Command Line & Version Control Terminology", video: "https://www.youtube.com/embed/K6Q31YkorUE?si=5T65SkGwUpfYu6_W" },
+        { module: 4, title: "4. Writing Clean Code Comments in English", video: "https://www.youtube.com/embed/wSDyiEjhp8k?si=jaXkUjfZWL_FQ_xi" },
+        { module: 5, title: "5. Describing Algorithms and Logic Flow", video: "https://www.youtube.com/embed/JJkWemM03Lg?si=79rPNwLBSz5DRxdj" },
+        { module: 6, title: "6. Database & SQL Query Terminology", video: "https://www.youtube.com/embed/zsjvFFKOm3c?si=H95Ia-y14CH8BN3e" },
+        { module: 7, title: "7. Common Error Messages & Debugging Phrasal Verbs", video: "https://www.youtube.com/embed/WNTWNNOEfOo?si=pMwJqZS8YjfZEh4Z" },
+        { module: 8, title: "8. Technical Communication in Pull Requests", video: "https://www.youtube.com/embed/LheeJPkdCu8?si=lwj1NvmReTo-NAeU" },
+        { module: 9, title: "9. Tech Interview Preparation & Coding Tasks", video: "https://www.youtube.com/embed/oKQcDjxsOvg?si=_T6EFI_3-RKFPe9u" },
+        { module: 10, title: "10. Professional English Presentation Tips", video: "https://www.youtube.com/embed/XlmKqkZkfqI?si=VWC8ue2TpDnxnUqk" }
     ]
 };
 
@@ -467,6 +489,10 @@ function initLessonPage() {
     document.getElementById('lesson-course-name').textContent = courseId.replace('-', ' ');
     document.getElementById('lesson-title').textContent = `Módulo ${moduleData.module}: ${moduleData.title}`;
     videoIframe.src = moduleData.video;
+
+    // Redireccionar a video en Youtube:
+    const externalLink = document.getElementById('external-video-link');
+    if(externalLink) externalLink.href = moduleData.video;
 
     // 5. Dibujamos el temario lateral dinámicamente
     const sidebar = document.getElementById('lesson-sidebar');
