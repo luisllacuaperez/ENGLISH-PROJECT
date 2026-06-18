@@ -7,7 +7,7 @@ $data = json_decode(file_get_contents("php://input"));
 if (!empty($data->user_id)) {
     try {
         // Hacemos un JOIN para obtener los datos del curso basados en la matrícula del usuario
-        $query = "SELECT c.* FROM courses c 
+        $query = "SELECT c.*, e.progress FROM courses c 
                   INNER JOIN enrollments e ON c.id = e.course_id 
                   WHERE e.user_id = :user_id";
                   
