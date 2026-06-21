@@ -7,8 +7,10 @@ $data = json_decode(file_get_contents("php://input"));
 
 // Verificar que los datos no estén vacíos
 if (!empty($data->name) && !empty($data->email) && !empty($data->password)) {
-    $name = $data->name;
-    $email = $data->email;
+    // Sanitización de entradas
+    // strip_tags elimina etiquetas HTML/PHP, htmlspecialchars convierte caracteres especiales en texto inofensivo
+    $name = htmlspecialchars(strip_tags($data->name), ENT_QUOTES, 'UTF-8');
+    $email = filter_var($data->email, FILTER_SANITIZE_EMAIL);
     
     // Encriptar la contraseña (NUNCA guardar contraseñas en texto plano)
     $password_hashed = password_hash($data->password, PASSWORD_BCRYPT);

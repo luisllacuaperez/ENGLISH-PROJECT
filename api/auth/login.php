@@ -45,6 +45,8 @@ if (!empty($data->email) && !empty($data->password)) {
                 ]
             ]);
         } else {
+            // 🛡️ MITIGACIÓN DE FUERZA BRUTA: Pausar la ejecución 1 segundo
+            sleep(1);
             // Credenciales incorrectas
             http_response_code(401); // No autorizado
             echo json_encode([
